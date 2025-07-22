@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Companies</title>
+</head>
+<body>
+    <h1>Registered Companies</h1>
+    {% if companies %}
+        <ul>
+            {% for item in companies %}
+                <li>{{ item[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No companies found.</p>
+    {% endif %}
+</body>
+</html>

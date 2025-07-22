@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerifyMe App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      max-width: 450px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 8px;
+      border: 1.5px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    select:focus, input[type="text"]:focus {
+      border-color: #2980b9;
+      outline: none;
+    }
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 12px;
+      background: #2980b9;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #1c5980;
+    }
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      background: #fdecea;
+      color: #c0392b;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .result {
+      margin-top: 20px;
+      background: #ecf9f1;
+      color: #27ae60;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+  <script>
+    function updateFields() {
+      const category = document.getElementById('verification_type').value;
+      
+      // Hide all optional fields initially
+      document.querySelectorAll('.optional-field').forEach(el => el.style.display = 'none');
+
+      if (category === 'profession') {
+        document.getElementById('profession_id_field').style.display = 'block';
+      } else if (category === 'company') {
+        document.getElementById('company_id_field').style.display = 'block';
+      } else if (category === 'stand') {
+        document.getElementById('stand_number_field').style.display = 'block';
+        document.getElementById('owner_id_field').style.display = 'block';
+      } else if (category === 'car') {
+        document.getElementById('car_plate_field').style.display = 'block';
+        document.getElementById('car_owner_id_field').style.display = 'block';
+      }
+    }
+
+    window.onload = updateFields;
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>VerifyMe App</h1>
+
+    <form method="POST" action="/">
+      <label for="verification_type">Select Verification Category:</label>
+      <select id="verification_type" name="verification_type" onchange="updateFields()" required>
+        <option value="">-- Select --</option>
+        <option value="profession" {% if request.form.verification_type == 'profession' %}selected{% endif %}>Profession</option>
+        <option value="company" {% if request.form.verification_type == 'company' %}selected{% endif %}>Company</option>
+        <option value="stand" {% if request.form.verification_type == 'stand' %}selected{% endif %}>Stand/House</option>
+        <option value="car" {% if request.form.verification_type == 'car' %}selected{% endif %}>Car</option>
+      </select>
+
+      <div id="profession_id_field" class="optional-field" style="display:none;">
+        <label for="profession_id">Enter Profession License Number:</label>
+        <input type="text" id="profession_id" name="profession_id" value="{{ request.form.profession_id or '' }}" />
+      </div>
+
+      <div id="company_id_field" class="optional-field" style="display:none;">
+        <label for="company_id">Enter Company Registration Number:</label>
+        <input type="text" id="company_id" name="company_id" value="{{ request.form.company_id or '' }}" />
+      </div>
+
+      <div id="stand_number_field" class="optional-field" style="display:none;">
+        <label for="stand_number">Enter Stand or House Number:</label>
+        <input type="text" id="stand_number" name="stand_number" value="{{ request.form.stand_number or '' }}" />
+      </div>
+
+      <div id="owner_id_field" class="optional-field" style="display:none;">
+        <label for="owner_id">Enter Owner National ID:</label>
+        <input type="text" id="owner_id" name="owner_id" value="{{ request.form.owner_id or '' }}" />
+      </div>
+
+      <div id="car_plate_field" class="optional-field" style="display:none;">
+        <label for="car_plate">Enter Car Registration Plate:</label>
+        <input type="text" id="car_plate" name="car_plate" value="{{ request.form.car_plate or '' }}" />
+      </div>
+
+      <div id="car_owner_id_field" class="optional-field" style="display:none;">
+        <label for="car_owner_id">Enter Car Owner National ID:</label>
+        <input type="text" id="car_owner_id" name="car_owner_id" value="{{ request.form.car_owner_id or '' }}" />
+      </div>
+
+      <button type="submit">Verify</button>
+    </form>
+
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
+
+    {% if result %}
+      <div class="result">
+        {% for row in result %}
+          {% for key, value in row.items() %}
+            <strong>{{ key }}:</strong> {{ value }}<br>
+          {% endfor %}
+          <hr>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

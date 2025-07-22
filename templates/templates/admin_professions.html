@@ -1,0 +1,29 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+    <h2>Profession Verifications</h2>
+
+    <form method="POST" action="{{ url_for('admin_professions') }}">
+        <label for="id_number">ID Number:</label><br>
+        <input type="text" name="id_number" required><br><br>
+
+        <label for="license_number">License Number:</label><br>
+        <input type="text" name="license_number" required><br><br>
+
+        <label for="profession">Profession:</label><br>
+        <input type="text" name="profession" required><br><br>
+
+        <button type="submit">Add Profession Verification</button>
+    </form>
+
+    <hr>
+
+    <h3>Existing Records:</h3>
+    <ul>
+        {% for row in professions %}
+            <li><strong>{{ row[3] }}</strong> (ID: {{ row[1] }}, License: {{ row[2] }})</li>
+        {% else %}
+            <li>No records found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

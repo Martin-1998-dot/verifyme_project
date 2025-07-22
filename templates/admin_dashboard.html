@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ admin_username }}</h2>
+    <p>This is your secure dashboard.</p>
+
+    <ul>
+        <li><a href="/admin/professions">View Professions</a></li>
+        <li><a href="/admin/companies">View Companies</a></li>
+        <li><a href="/admin/houses">View Houses</a></li>
+        <li><a href="/admin/cars">View Cars</a></li>
+    </ul>
+
+    <a href="{{ url_for('admin_logout') }}">Logout</a>
+</body>
+</html>
