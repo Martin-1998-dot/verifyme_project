@@ -1,0 +1,9 @@
+# Ignore virtual environment
+verifyme-env/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# (Optional) Ignore local database
+verifyme.db

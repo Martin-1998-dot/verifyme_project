@@ -1,45 +1,27 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3
+import os
 
 app = Flask(__name__)
+DB_PATH = os.path.join(os.path.dirname(__file__), 'verifyme.db')
 
-# Admin: View Professions
-@app.route('/admin/professions')
-def view_professions():
-    conn = sqlite3.connect('verifyme.db')
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM profession")
-    professions = cur.fetchall()
+@app.route('/admin/professions', methods=['GET', 'POST'])
+def admin_professions():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    if request.method == 'POST':
+        id_number = request.form['id_number']
+        license_number = request.form.get('license_number', '')
+        c.execute("INSERT INTO profession_ids (id_number, license_number) VALUES (?, ?)", (id_number, license_number))
+        conn.commit()
+
+    c.execute("SELECT id_number, license_number FROM profession_ids")
+    professions = c.fetchall()
     conn.close()
+
     return render_template('admin_professions.html', professions=professions)
 
-# Admin: View Companies
-@app.route('/admin/companies')
-def view_companies():
-    conn = sqlite3.connect('verifyme.db')
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM companies")
-    companies = cur.fetchall()
-    conn.close()
-    return render_template('admin_companies.html', companies=companies)
-
-# Admin: View Houses
-@app.route('/admin/houses')
-def view_houses():
-    conn = sqlite3.connect('verifyme.db')
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM houses")
-    houses = cur.fetchall()
-    conn.close()
-    return render_template('admin_houses.html', houses=houses)
-
-# Home route (optional for testing)
-@app.route('/')
-def home():
-    return '<h1>VerifyMe Admin Panel</h1><p>Go to /admin/professions, /admin/companies, or /admin/houses</p>'
-
+# Keep this line at the end of your app.py
 if __name__ == '__main__':
     app.run(debug=True)
