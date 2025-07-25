@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Cars</title>
+</head>
+<body>
+    <h2>Register Car</h2>
+    <form method="post">
+        Plate Number: <input type="text" name="plate_number"><br>
+        Owner ID: <input type="text" name="owner_id"><br>
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Registered Cars</h3>
+    <ul>
+        {% for car in cars %}
+            <li>Plate: {{ car[0] }}, Owner ID: {{ car[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

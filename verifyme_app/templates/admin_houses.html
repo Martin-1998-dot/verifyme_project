@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Houses</title>
+</head>
+<body>
+    <h2>Register House/Stand</h2>
+    <form method="post">
+        Stand Number: <input type="text" name="stand_number"><br>
+        Owner ID: <input type="text" name="owner_id"><br>
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Registered Houses</h3>
+    <ul>
+        {% for house in houses %}
+            <li>Stand: {{ house[0] }}, Owner ID: {{ house[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

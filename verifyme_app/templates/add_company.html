@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Edit Company' if company else 'Add Company' }}</title>
+</head>
+<body>
+    <h2>{{ 'Edit Company' if company else 'Add Company' }}</h2>
+
+    <form method="POST">
+        <label for="name">Company Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ company.name if company else '' }}" required><br><br>
+
+        <label for="registration_number">Registration Number:</label><br>
+        <input type="text" id="registration_number" name="registration_number" value="{{ company.registration_number if company else '' }}" required><br><br>
+
+        <button type="submit">{{ 'Update Company' if company else 'Add Company' }}</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('admin.view_companies') }}">Back to Company List</a>
+</body>
+</html>

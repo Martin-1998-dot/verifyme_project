@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Profession</title>
+</head>
+<body>
+    <h1>Profession Verification</h1>
+    <form method="POST">
+        ID Number: <input type="text" name="id_number"><br>
+        License Number: <input type="text" name="license_number"><br>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Results:</h2>
+        <ul>
+            {% for row in results %}
+                <li>{{ row['full_name'] }} - {{ row['profession'] }} ({{ row['workplace'] }})</li>
+            {% endfor %}
+        </ul>
+    {% elif no_results %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

@@ -3,25 +3,24 @@ import sqlite3
 conn = sqlite3.connect('verifyme.db')
 c = conn.cursor()
 
-# Insert sample profession records
-c.execute("INSERT OR IGNORE INTO profession (id_number, license_number, profession) VALUES (?, ?, ?)",
-          ('123456789', 'PROF001', 'Engineer'))
-c.execute("INSERT OR IGNORE INTO profession (id_number, license_number, profession) VALUES (?, ?, ?)",
-          ('987654321', 'PROF002', 'Doctor'))
+# Sample profession
+c.execute('''
+INSERT INTO profession_ids (id_number, license_number, full_name, profession, institution)
+VALUES ('123456', 'LIC001', 'Dr. Musa Ncube', 'Medical Doctor', 'Parirenyatwa Hospital')
+''')
 
-# Insert sample cars
-c.execute("INSERT OR IGNORE INTO cars (plate_number, owner_id, model) VALUES (?, ?, ?)",
-          ('ABC123', '123456789', 'Toyota Corolla'))
-c.execute("INSERT OR IGNORE INTO cars (plate_number, owner_id, model) VALUES (?, ?, ?)",
-          ('XYZ789', '987654321', 'Honda Civic'))
+# Sample car
+c.execute('''
+INSERT INTO car_records (plate_number, owner_id, full_name, car_model, registration_year)
+VALUES ('ABZ1234', '567890', 'Thandiwe Dube', 'Toyota Corolla', '2018')
+''')
 
-# Insert sample properties
-c.execute("INSERT OR IGNORE INTO properties (stand_number, owner_id, location) VALUES (?, ?, ?)",
-          ('STAND001', '123456789', 'Bulawayo'))
-c.execute("INSERT OR IGNORE INTO properties (stand_number, owner_id, location) VALUES (?, ?, ?)",
-          ('STAND002', '987654321', 'Harare'))
+# Sample house
+c.execute('''
+INSERT INTO house_records (stand_number, owner_id, full_name, location, ownership_status)
+VALUES ('ST123', '9101112', 'Blessing Moyo', 'Bulawayo', 'Owned')
+''')
 
 conn.commit()
 conn.close()
-
-print("✅ Sample data added.")
+print("✅ Sample data inserted successfully.")

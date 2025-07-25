@@ -1,0 +1,59 @@
+{% extends "base_admin.html" %}
+
+{% block content %}
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #2980b9;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Registered Cars</h3>
+      <p>View, search, and manage vehicle verification data.</p>
+      <a href="/admin/cars">Go to Cars</a>
+    </div>
+    <div class="card">
+      <h3>Registered Houses</h3>
+      <p>Manage and verify property ownership details.</p>
+      <a href="/admin/houses">Go to Houses</a>
+    </div>
+    <div class="card">
+      <h3>Verified Professions</h3>
+      <p>Control and confirm profession registration records.</p>
+      <a href="/admin/professions">Go to Professions</a>
+    </div>
+    <div class="card">
+      <h3>Registered Companies</h3>
+      <p>Oversee company listings and verification status.</p>
+      <a href="/admin/companies">Go to Companies</a>
+    </div>
+  </div>
+{% endblock %}

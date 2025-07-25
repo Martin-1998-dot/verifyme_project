@@ -3,41 +3,42 @@ import sqlite3
 conn = sqlite3.connect('verifyme.db')
 c = conn.cursor()
 
-# Table for IDs
+# Professions table
 c.execute('''
-CREATE TABLE IF NOT EXISTS ids (
-    id_number TEXT PRIMARY KEY,
-    full_name TEXT
+CREATE TABLE profession_ids (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_number TEXT NOT NULL,
+    license_number TEXT NOT NULL,
+    full_name TEXT,
+    profession TEXT,
+    institution TEXT
 )
 ''')
 
-# Table for profession verification
+# Cars table
 c.execute('''
-CREATE TABLE IF NOT EXISTS profession (
-    id_number TEXT,
-    license_number TEXT,
-    profession TEXT
+CREATE TABLE car_records (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    plate_number TEXT NOT NULL,
+    owner_id TEXT NOT NULL,
+    full_name TEXT,
+    car_model TEXT,
+    registration_year TEXT
 )
 ''')
 
-# Table for cars
+# Houses table
 c.execute('''
-CREATE TABLE IF NOT EXISTS cars (
-    plate_number TEXT PRIMARY KEY,
-    owner_id TEXT,
-    model TEXT
-)
-''')
-
-# Table for houses/stands
-c.execute('''
-CREATE TABLE IF NOT EXISTS properties (
-    stand_number TEXT PRIMARY KEY,
-    owner_id TEXT,
-    location TEXT
+CREATE TABLE house_records (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    stand_number TEXT NOT NULL,
+    owner_id TEXT NOT NULL,
+    full_name TEXT,
+    location TEXT,
+    ownership_status TEXT
 )
 ''')
 
 conn.commit()
 conn.close()
-print("✅ Database initialized.")
+print("✅ New database and tables created successfully.")

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Professions</title>
+</head>
+<body>
+    <h2>Register Profession</h2>
+    <form method="post">
+        ID Number: <input type="text" name="id_number"><br>
+        License Number: <input type="text" name="license_number"><br>
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Registered Professions</h3>
+    <ul>
+        {% for prof in professions %}
+            <li>ID: {{ prof[0] }}, License: {{ prof[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

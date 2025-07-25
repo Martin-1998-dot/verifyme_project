@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #fffaf0;
+        }
+        form input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 300px;
+        }
+        input[type="submit"] {
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: #0059b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Company</h1>
+    <form method="POST">
+        <label>Company Name:</label><br>
+        <input type="text" name="name" value="{{ company.name }}" required><br>
+        <label>Registration Number:</label><br>
+        <input type="text" name="registration_number" value="{{ company.registration_number }}" required><br>
+        <input type="submit" value="Update Company">
+    </form>
+    <br>
+    <a href="/admin/companies">← Back to Company List</a>
+</body>
+</html>
