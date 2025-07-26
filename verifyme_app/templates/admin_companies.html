@@ -1,39 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Company List</title>
+    <title>Registered Companies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .add-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Companies</h2>
+    <h2>Registered Companies</h2>
 
-    <p><a href="{{ url_for('admin.add_company') }}">Add New Company</a></p>
+    <a href="{{ url_for('admin_companies.add_company') }}" class="add-btn">+ Add New Company</a>
 
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Registration Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for company in companies %}
-            <tr>
-                <td>{{ company.id }}</td>
-                <td>{{ company.name }}</td>
-                <td>{{ company.registration_number }}</td>
-                <td>
-                    <a href="{{ url_for('admin.edit_company', company_id=company.id) }}">Edit</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="4">No companies found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Registration #</th>
+            <th>Status</th>
+        </tr>
+        {% for company in companies %}
+        <tr>
+            <td>{{ company.id }}</td>
+            <td>{{ company.name }}</td>
+            <td>{{ company.registration_number }}</td>
+            <td>{{ company.status }}</td>
+        </tr>
+        {% endfor %}
     </table>
-
 </body>
 </html>
+
+
+
+
