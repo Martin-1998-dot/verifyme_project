@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Companies</h1>
+
+    <form method="post" action="/add_company">
+        <input type="text" name="name" placeholder="Company Name" required>
+        <input type="text" name="reg_number" placeholder="Registration Number" required>
+        <input type="text" name="status" placeholder="Status" required>
+        <button type="submit">Add Company</button>
+    </form>
+
+    <h2>Existing Companies</h2>
+    <ul>
+        {% for company in companies %}
+            <li>{{ company.name }} - {{ company.reg_number }} - {{ company.status }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

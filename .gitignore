@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ignore virtual environment
 verifyme-env/
 
@@ -7,3 +8,21 @@ __pycache__/
 
 # (Optional) Ignore local database
 verifyme.db
+=======
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Database
+*.db
+
+# IDE files
+.vscode/
+.idea/
+>>>>>>> 5385e3a (Initial commit: FastAPI company dashboard)
