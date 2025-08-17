@@ -1,13 +1,11 @@
-# Ignore virtual environments
+# Virtual environments
 verifyme_env/
 venv/
 
-# Ignore database files
-*.db
-
-# Ignore CSV exports
-*.csv
-
-# Ignore Python cache
+# Python caches
 __pycache__/
 *.pyc
+
+# Databases and CSV exports
+*.db
+*.csv
